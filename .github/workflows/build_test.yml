@@ -24,16 +24,17 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: check
+          arguments: --no-default-features --features vulkan
       - name: Run rustfmt in check mode
         uses: actions-rs/cargo@v1
         with:
-          command: rustfmt
-          argumentss: --check
+          command: fmt
+          arguments: --no-default-features --features vulkan --  --check
       - name: Run clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          argumentss: -- -D warnings
+          arguments: --no-default-features --features vulkan -- -D warnings
 
   build_test:
     strategy:
