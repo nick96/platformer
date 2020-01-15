@@ -26,17 +26,17 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: check
-          arguments: --features vulkan
+          args: --features vulkan
       - name: Run rustfmt in check mode
         uses: actions-rs/cargo@v1
         with:
           command: fmt
-          arguments: --features vulkan --  --check
+          args: --features vulkan --  --check
       - name: Run clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          arguments: --features vulkan -- -D warnings
+          args: --features vulkan -- -D warnings
 
   build_test_linux:
     name: Linux build/test
@@ -55,7 +55,7 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-          arguments: --features vulkan
+          args: --features vulkan
 
   build_test_windows:
     name: Windows build/test
@@ -72,11 +72,11 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-          arguments: --features vulkan
+          args: --features vulkan
 
   # macOS needs to be build separately because we need the 'metal' feature, not 'vulkan'
   build_test_macos:
-    name: Build and test
+    name: MacOS build/test
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -91,4 +91,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-          arguments: --features metal
+          args: --features metal
