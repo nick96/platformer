@@ -1,0 +1,17 @@
+[package]
+name = "platformer"
+version = "0.1.0"
+authors = []
+edition = "2018"
+
+[dependencies]
+amethyst = "0.13.2"
+
+[features]
+# Works for linux and window, but not for macOS. Instead you must use:
+#    cargo build --no-default-features --features metal
+default = ["vulkan"]
+
+empty = ["amethyst/empty"]
+metal = ["amethyst/metal"]
+vulkan = ["amethyst/vulkan"]
