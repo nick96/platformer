@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install system dependencies
-        run: sudo apt install libasound2-dev
+        run: sudo apt-get install -y libasound2-dev
 
       - name: Setup rust stable
         uses: actions-rs/toolchain@v1
@@ -48,7 +48,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install system dependencies
-        run: sudo apt install libasound2-dev
+        run: sudo apt-get install -y libasound2-dev
 
 
       - name: Setup rust stable
