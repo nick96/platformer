@@ -7,6 +7,9 @@ edition = "2018"
 [dependencies]
 amethyst = "0.13.2"
 
+[dev-dependencies]
+amethyst_test = "*"
+
 [features]
 # Works for linux and window, but not for macOS. Instead you must use:
 #    cargo build --no-default-features --features metal
