@@ -1,7 +1,7 @@
 [package]
 name = "platformer"
-version = "0.1.0"
-authors = []
+version = "0.0.1"
+authors = ["Nick Spain <nicholas.spain96@gmail.com>"]
 edition = "2018"
 
 [dependencies]
