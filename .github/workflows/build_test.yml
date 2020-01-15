@@ -26,42 +26,53 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: check
-          arguments: --no-default-features --features vulkan
+          arguments: --features vulkan
       - name: Run rustfmt in check mode
         uses: actions-rs/cargo@v1
         with:
           command: fmt
-          arguments: --no-default-features --features vulkan --  --check
+          arguments: --features vulkan --  --check
       - name: Run clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
-          arguments: --no-default-features --features vulkan -- -D warnings
+          arguments: --features vulkan -- -D warnings
 
   build_test_linux:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest, windows-latest]
-    name: Build and test on ${{ matrix.platform }}
+    name: Linux build/test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install system dependencies
         run: sudo apt-get install -y libasound2-dev
-
-
       - name: Setup rust stable
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
-
       - name: Run tests
         uses: actions-rs/cargo@v1
         with:
           command: test
-          arguments: --no-default-features --features vulkan
+          arguments: --features vulkan
+
+  build_test_windows:
+    name: Windows build/test
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup rust stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Run tests
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+          arguments: --features vulkan
 
   # macOS needs to be build separately because we need the 'metal' feature, not 'vulkan'
   build_test_macos:
@@ -80,4 +91,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-          arguments: --no-default-features --features metal
+          arguments: --features metal
