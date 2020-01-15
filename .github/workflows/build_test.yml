@@ -38,14 +38,20 @@ jobs:
           command: clippy
           args: --features vulkan -- -D warnings
 
-  build_test_linux:
-    name: Linux build/test
-    runs-on: ubuntu-latest
+  build_test:
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, windows-latest, macos-latest]
+    name: ${{ matrix.platform }} build/test
+    runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install system dependencies
-        run: sudo apt-get install -y gcc pkg-config openssl libasound2-dev build-essential python3 libfreetype6-dev libexpat1-dev libxcb-composite0-dev libssl-dev libx11-dev
+        run: |
+          sudo apt-get install -y gcc pkg-config openssl libasound2-dev build-essential \
+              python3 libfreetype6-dev libexpat1-dev libxcb-composite0-dev libssl-dev libx11-dev
+        if: matrix.platform ==  'ubuntu-latest'
       - name: Setup rust stable
         uses: actions-rs/toolchain@v1
         with:
@@ -55,40 +61,4 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: test
-          args: --features vulkan
-
-  build_test_windows:
-    name: Windows build/test
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup rust stable
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-      - name: Run tests
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --features vulkan
-
-  # macOS needs to be build separately because we need the 'metal' feature, not 'vulkan'
-  build_test_macos:
-    name: MacOS build/test
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup rust stable
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-
-      - name: Run tests
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --features metal
+          args: --features empty
