@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install system dependencies
+        run: sudo apt install libasound2-dev
 
       - name: Setup rust stable
         uses: actions-rs/toolchain@v1
@@ -36,15 +38,19 @@ jobs:
           command: clippy
           arguments: --no-default-features --features vulkan -- -D warnings
 
-  build_test:
+  build_test_linux:
     strategy:
       matrix:
         platform: [ubuntu-latest, windows-latest]
     name: Build and test on ${{ matrix.platform }}
-    runs-on: ${{ matrix.platform }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Install system dependencies
+        run: sudo apt install libasound2-dev
+
+
       - name: Setup rust stable
         uses: actions-rs/toolchain@v1
         with:
