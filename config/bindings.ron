@@ -1,0 +1,13 @@
+(
+    axes: {
+        "vertical": Emulated(
+            pos: Key(W), // Jump (up)
+            neg: Key(S) // Duck (down)
+        ),
+        "horizontal": Emulated(
+            pos: Key(D), // Right
+            neg: Key(A) // Left
+        )
+    },
+    actions: {}
+)

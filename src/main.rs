@@ -1,5 +1,6 @@
 use amethyst::{
     core::transform::TransformBundle,
+    input::{InputBundle, StringBindings},
     prelude::*,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
@@ -21,7 +22,10 @@ fn main() -> amethyst::Result<()> {
     let app_root = application_root_dir()?;
 
     let config_dir = app_root.join("config");
+    let assets_dir = app_root.join("assets");
+
     let display_config_path = config_dir.join("display.ron");
+    let bindings_config_path = config_dir.join("bindings.ron");
 
     let render_bundle = RenderingBundle::<DefaultBackend>::new()
         .with_plugin(
@@ -29,15 +33,16 @@ fn main() -> amethyst::Result<()> {
                 .with_clear([0.34, 0.36, 0.52, 1.0]),
         )
         .with_plugin(RenderFlat2D::default());
-
     let tranform_bundle = TransformBundle::new();
+    let input_bundle =
+        InputBundle::<StringBindings>::new().with_bindings_from_file(bindings_config_path)?;
 
     let game_data = GameDataBuilder::default()
         .with_bundle(render_bundle)?
         .with_bundle(tranform_bundle)?
-        .with_bundle(TransformBundle::new())?;
+        .with_bundle(input_bundle)?;
 
-    let mut game = Application::new("/", MyState, game_data)?;
+    let mut game = Application::new(assets_dir, MyState, game_data)?;
     game.run();
 
     Ok(())
