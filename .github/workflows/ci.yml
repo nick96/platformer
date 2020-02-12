@@ -31,7 +31,7 @@ jobs:
         run: cargo check --features vulkan
         if: matrix.platform != 'macos-latest'
       - name: Run cargo check (macos)
-        run: cargo check --features metals
+        run: cargo check --features metal
         if: matrix.platform == 'macos-latest'
 
       - name: Run rustfmt in check mode
