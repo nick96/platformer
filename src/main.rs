@@ -1,3 +1,5 @@
+extern crate platformer;
+
 use amethyst::{
     core::transform::TransformBundle,
     input::{InputBundle, StringBindings},
@@ -10,11 +12,7 @@ use amethyst::{
     utils::application_root_dir,
 };
 
-struct MyState;
-
-impl SimpleState for MyState {
-    fn on_start(&mut self, _data: StateData<'_, GameData<'_, '_>>) {}
-}
+use platformer::gamestate::GameState;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -42,7 +40,7 @@ fn main() -> amethyst::Result<()> {
         .with_bundle(tranform_bundle)?
         .with_bundle(input_bundle)?;
 
-    let mut game = Application::new(assets_dir, MyState, game_data)?;
+    let mut game = Application::build(assets_dir, GameState::default())?.build(game_data)?;
     game.run();
 
     Ok(())

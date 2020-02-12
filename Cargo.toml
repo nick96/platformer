@@ -11,6 +11,10 @@ amethyst = "0.13.2"
 amethyst_test = "*"
 
 [features]
+default = ["vulkan"]
 empty = ["amethyst/empty"]
 metal = ["amethyst/metal"]
 vulkan = ["amethyst/vulkan"]
+
+# [[bin]]
+# name = "platformer"
