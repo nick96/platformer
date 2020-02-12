@@ -1,7 +1,7 @@
 # platformer
 
-![GitHub](https://img.shields.io/github/license/nick96/platformer)
-![CI](https://github.com/nick96/platformer/workflows/ci/badge.svg)
+![License](https://img.shields.io/github/license/nick96/platformer)
+![CI](https://img.shields.io/github/workflow/status/nick96/platformer/CI)
 
 ## How to run
 
