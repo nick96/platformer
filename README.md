@@ -1,5 +1,8 @@
 # platformer
 
+![GitHub](https://img.shields.io/github/license/nick96/platformer)
+![CI](https://github.com/nick96/platformer/workflows/ci/badge.svg)
+
 ## How to run
 
 To run the game, use
