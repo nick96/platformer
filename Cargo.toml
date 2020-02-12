@@ -5,7 +5,7 @@ authors = ["Nick Spain <nicholas.spain96@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-amethyst = "0.13.2"
+amethyst = "0.14.0"
 
 [dev-dependencies]
 amethyst_test = "*"
