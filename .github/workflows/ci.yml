@@ -33,7 +33,7 @@ jobs:
             key: v1-cache-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Run cargo check
-        run: cargo check --feature empty
+        run: cargo check --features empty
 
       - name: Run rustfmt in check mode
         run: cargo fmt -- --check
