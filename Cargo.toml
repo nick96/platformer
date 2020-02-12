@@ -7,6 +7,9 @@ edition = "2018"
 [dependencies]
 amethyst = "0.14.0"
 
+[target.'cfg(feature = "metal")'.dependencies]
+objc = "=0.2.6"
+
 [dev-dependencies]
 amethyst_test = "*"
 
