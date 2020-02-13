@@ -13,6 +13,7 @@ use amethyst::{
 };
 
 use platformer::gamestate::GameState;
+use platformer::systems;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -38,7 +39,8 @@ fn main() -> amethyst::Result<()> {
     let game_data = GameDataBuilder::default()
         .with_bundle(render_bundle)?
         .with_bundle(tranform_bundle)?
-        .with_bundle(input_bundle)?;
+        .with_bundle(input_bundle)?
+        .with(systems::PlayerSystem, "player_system", &["input_system"]);
 
     let mut game = Application::build(assets_dir, GameState::default())?.build(game_data)?;
     game.run();

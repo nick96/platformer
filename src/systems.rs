@@ -6,7 +6,7 @@ use amethyst::{
 };
 
 use crate::components::Player;
-use crate::consts::{ARENA_HEIGHT, ARENA_WIDTH, PLAYER_HEIGHT};
+use crate::consts::{ARENA_HEIGHT, PLAYER_HEIGHT};
 
 #[derive(SystemDesc)]
 pub struct PlayerSystem;
@@ -18,7 +18,7 @@ impl<'s> System<'s> for PlayerSystem {
         Read<'s, InputHandler<StringBindings>>,
     );
 
-    fn run(&mut self, (mut transfs, players, input): Self::SystemData) {
+    fn run(&mut self, (mut transfs, players, _input): Self::SystemData) {
         for (_, transf) in (&players, &mut transfs).join() {
             let scaled_amount = 1.2 as f32;
             let y = transf.translation().y;
