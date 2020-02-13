@@ -4,8 +4,13 @@ version = "0.0.1"
 authors = ["Nick Spain <nicholas.spain96@gmail.com>"]
 edition = "2018"
 
+[build-dependencies]
+amethyst_rendy = "0.4.0"
+walkdir = "2"
+ron = "0.5.1"
+
 [dependencies]
-amethyst = "0.13.2"
+amethyst = "0.14.0"
 
 [target.'cfg(feature = "metal")'.dependencies]
 objc = "=0.2.6"
@@ -18,6 +23,3 @@ default = ["vulkan"]
 empty = ["amethyst/empty"]
 metal = ["amethyst/metal"]
 vulkan = ["amethyst/vulkan"]
-
-# [[bin]]
-# name = "platformer"
