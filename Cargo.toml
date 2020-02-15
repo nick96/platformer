@@ -11,6 +11,7 @@ ron = "0.5.1"
 
 [dependencies]
 amethyst = "0.14.0"
+log = "0.4"
 
 [target.'cfg(feature = "metal")'.dependencies]
 objc = "=0.2.6"
