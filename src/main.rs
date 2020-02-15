@@ -16,7 +16,13 @@ use platformer::gamestate::GameState;
 use platformer::systems;
 
 fn main() -> amethyst::Result<()> {
-    amethyst::start_logger(Default::default());
+    // amethyst::start_logger(Default::default());
+    amethyst::Logger::from_config(amethyst::LoggerConfig {
+        level_filter: amethyst::LogLevelFilter::Warn,
+        ..Default::default()
+    })
+    .level_for("platformer", amethyst::LogLevelFilter::Debug)
+    .start();
 
     let app_root = application_root_dir()?;
 
