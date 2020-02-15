@@ -33,7 +33,10 @@ jobs:
             key: v1-cache-${{ runner.os }}-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Run cargo check
-        run: cargo check --features empty
+        run: cargo check --features vulkan
+      - name: Run tests
+        run: cargo check --features metal
+        if: matrix.platform == 'macos-latest'
 
       - name: Run rustfmt in check mode
         run: cargo fmt -- --check
