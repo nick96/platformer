@@ -48,8 +48,8 @@ jobs:
           cargo clippy --features empty -- -D warnings
 
       - name: Run tests
-        run: cargo run tests --features vulkan
+        run: cargo test --features vulkan
         if: matrix.platform != 'macos-latest'
       - name: Run tests
-        run: cargo run tests --features metal
+        run: cargo test --features metal
         if: matrix.platform == 'macos-latest'
