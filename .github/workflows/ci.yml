@@ -34,18 +34,25 @@ jobs:
 
       - name: Run cargo check
         run: cargo check --features vulkan
-      - name: Run tests
+        if: matrix.platform != 'macos-latest'
+      - name: Run cargo check
         run: cargo check --features metal
         if: matrix.platform == 'macos-latest'
 
       - name: Run rustfmt in check mode
         run: cargo fmt -- --check
 
-      - name: Run clippy
+      - name: Install clippy
         run: |
           rustup update
           rustup component add clippy
-          cargo clippy --features empty -- -D warnings
+
+      - name: Run clippy
+        run: cargo clippy --features vulkan -- -D warnings
+        if: matrix.platform != 'macos-latest'
+      - name: Run clippy
+        run: cargo clippy --features metal -- -D warnings
+        if: matrix.platform == 'macos-latest'
 
       - name: Run tests
         run: cargo test --features vulkan
