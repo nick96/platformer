@@ -11,7 +11,7 @@ impl SimpleState for GameState {
         let world = data.world;
         let sprite_sheet_handle = load_sprite_sheet(world, "textures/black_square");
         world.register::<Player>();
-        init_player(world, sprite_sheet_handle.clone());
+        init_player(world, sprite_sheet_handle);
         init_camera(world);
     }
 }

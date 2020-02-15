@@ -8,6 +8,7 @@ use amethyst::{
 
 use crate::consts::{ARENA_HEIGHT, ARENA_WIDTH};
 
+#[derive(Default)]
 pub struct Player;
 
 impl Player {
@@ -24,7 +25,7 @@ pub fn init_player(world: &mut World, ssh: Handle<SpriteSheet>) {
     let mut local_transf = Transform::default();
     local_transf.set_translation_xyz(ARENA_WIDTH / 2.0, ARENA_HEIGHT / 2.0, 0.0);
     let sprite_render = SpriteRender {
-        sprite_sheet: ssh.clone(),
+        sprite_sheet: ssh,
         sprite_number: 1,
     };
     world
