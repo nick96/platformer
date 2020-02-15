@@ -1,3 +1,9 @@
+//! Systems controlling the game world.
+//!
+//! In ECS, systems iterate over subsets of the components and perform actions
+//! based on that information. The systems in this module control the platformer
+//! universe.
+
 use amethyst::{
     core::Transform,
     derive::SystemDesc,
@@ -9,6 +15,13 @@ use crate::components::Player;
 use crate::consts::{ARENA_HEIGHT, ARENA_WIDTH, PLAYER_HEIGHT, PLAYER_WIDTH};
 
 /// System to control player movement.
+///
+/// Iterates over the players (1) and updates their position based on the
+/// input data. The player cannot be moved out of the bounds of
+/// `ARENA_WIDTH` and `ARENA_HEIGHT`, if they try to the player won't move
+/// any further.
+///
+/// See bindings_config.ron for the actual bindings.
 #[derive(SystemDesc)]
 pub struct PlayerSystem;
 
@@ -19,14 +32,6 @@ impl<'s> System<'s> for PlayerSystem {
         Read<'s, InputHandler<StringBindings>>,
     );
 
-    /// Run the player system.
-    ///
-    /// Iterates over the players (1) and updates their position based on the
-    /// input data. The player cannot be moved out of the bounds of
-    /// `ARENA_WIDTH` and `ARENA_HEIGHT`, if they try to the player won't move
-    /// any further.
-    ///
-    /// See bindings_config.ron for the actual bindings.
     fn run(&mut self, (mut transfs, players, input): Self::SystemData) {
         for (_, transf) in (&players, &mut transfs).join() {
             let min_x = ARENA_WIDTH - PLAYER_WIDTH * 0.5;
