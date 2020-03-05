@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: rust
+    steps:
+      - checkout
+      - run:
+          name: Versions
+          command: |
+            rustc --version
+            cargo --version
+            rustup --version
+      - run:
+          name: Install cargo components
+          command: |
+            rustup component add clippy
+            rustup component add rustfmt
+      - run:
+          name: Linters
+          command: |
+            cargo fmt -- --check
+            cargo check --features empty
+            cargo clippy --features empty -- -D warnings
+      - run:
+          name: Test
+          command: |
+            cargo test --features empty
