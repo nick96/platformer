@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  test:
+  build:
     docker:
       - image: rust
     steps:
@@ -12,6 +12,9 @@ jobs:
             rustc --version
             cargo --version
             rustup --version
+      - restore_cache:
+          keys:
+            - v1-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
       - run:
           name: Install cargo components
           command: |
@@ -27,3 +30,7 @@ jobs:
           name: Test
           command: |
             cargo test --features empty
+      - save_cache:
+          paths:
+            - "~/.cargo"
+          key: v1-cargo-cache-{{ arch }}-{{ checksum "Cargo.lock" }}
