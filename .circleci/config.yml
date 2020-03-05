@@ -7,6 +7,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install system deps
+          command: |
+            sudo apt install libasound2-dev libx11-xcb-dev libssl-dev
+      - run:
           name: Versions
           command: |
             rustc --version
